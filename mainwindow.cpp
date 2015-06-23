@@ -8,6 +8,8 @@
 #include<QTextStream>
 #include <Qfile>
 #include <QFileDialog>
+#include <QProcess>
+#include <QDebug>
 using namespace std;
 
 
@@ -17,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    connect(diag, SIGNAL(ColChanged(int )), this, SLOT(setCol(int)));
     connect(diag, SIGNAL(RowChanged(int )), this, SLOT(setRow(int)));
     connect(anDiag,SIGNAL(AnalysisChosen(QAbstractButton * )),this, SLOT(setAnalysis(QAbstractButton *)));
     connect(anDiag,SIGNAL(nPermutationsChosen(int )),this, SLOT(setNPermutations(int)));
@@ -48,17 +50,17 @@ void MainWindow::setNPermutations(int N)
     this->nPerm=N;
 }
 
-void MainWindow::setStatistics(QString stat)
+void MainWindow::setStatistics(int stat)
 {
     //inacabado
-    switch (stat){
-    case 1:
-    this->statistics=aov();
-        break;
-    case 2:
-        {this->statistics=aov();}
-        break;
-
+    //    switch (stat){
+    //    case 1:
+    //    this->statistics=aov();
+    //        break;
+    //    case 2:
+    //        {this->statistics=aov();}
+    //        break;
+    //}
 }
 
 void MainWindow::setTable(){
@@ -85,19 +87,20 @@ void MainWindow::setTable(){
 
 void MainWindow::GenerateFiles(){
     //write data file
-    QFile file("data.txt");
-    file.open(QFile::WriteOnly | QFile::Text);
-    QTextStream out(&file);
+    QFile datafile("data.txt");
+    datafile.open(QFile::WriteOnly | QFile::Text| QFile::Truncate);
+    QTextStream out(&datafile);
 
-    if (file.exists()){// taken from http://www.qtcentre.org/threads/7602-Reading-writing-QTableWidget
+    if (datafile.exists()){// taken from http://www.qtcentre.org/threads/7602-Reading-writing-QTableWidget
         //QStringList headers;
+        datafile.resize(0);
         for(int i = 0; i < ui->myTable->model()->columnCount(); i++)http://stackoverflow.com/questions/22944787/how-to-get-list-of-headers-of-a-qtableview
         {
             // headers.append(myTableView->model()->headerData(i, Qt::Horizontal).toString();
             out<<ui->myTable->model()->headerData(i, Qt::Horizontal).toString();
             if (i!=ui->myTable->model()->columnCount()-1){out<<",";}
         }
-        out<<"\n";
+            out<<"\n";
         for (int i = 0; i < ui->myTable->rowCount(); ++i) {
             if (i > 0)
                 out << '\n';
@@ -108,20 +111,40 @@ void MainWindow::GenerateFiles(){
                 out << cell->text().replace(",","."); //convert comma to dot
             }
         }}
-    file.close();
+    datafile.close();
 
     //write analysis.r file
-    QFile file2("analysis.R");
-    file2.open(QFile::WriteOnly | QFile::Text);
-    QTextStream out2(&file2);
+    QFile Rfile("analysis.R");
+    Rfile.open(QFile::WriteOnly | QFile::Text| QFile::Truncate);
+    QTextStream out2(&Rfile);
 
-    if (file2.exists()){
-        out2<<"library Rsampling;"<<"\n";
+    if (Rfile.exists()){
+        Rfile.resize(0);
+        out2<<"x11();";
+        out2<<"plot(1:100);";
+        out2<<"library (Rsampling);"<<"\n";
         out2<<"read.table(\"data.txt\", header=TRUE, sep=\",\")";
         out2<<"source("<<this->statistics<<")\n";
         out2<<"resampling(\""<<this->analysis<<",nPerm="<<this->nPerm<<",stat="<<this->statistics<<")";
     }
-    file2.close();
+    Rfile.close();
+
+    //write batch file to run R in windows
+    QFile BatchFile("Rbatch.bat");
+    BatchFile.open(QFile::WriteOnly | QFile::Text| QFile::Truncate);
+    QTextStream out3(&BatchFile);
+    if (BatchFile.exists()){
+        BatchFile.resize(0);
+        out3<<" @echo off"<<"\n";
+        out3<<" echo Rbatch Started."<<"\n";
+        out3<<" call Rpathset.bat"<<"\n"; ///https://code.google.com/p/batchfiles/
+        out3<<" R CMD BATCH analysis.R"<<"\n";
+        //    out3<<" R  plot(c(1:100)"<<"\n";
+        //    out3<<" Rscript plot(c(1:100)";
+        out3<<" echo Rbatch Ended."<<"\n";
+       // out3<<"pause";
+    }
+    BatchFile.close();
 
 }
 
@@ -155,8 +178,8 @@ void MainWindow::on_actionAbrir_Arquivo_triggered()
     int numColumns = rows.first().count(',') + 1;
     ui->myTable->setRowCount(numRows);
     ui->myTable->setColumnCount(numColumns);
-     QStringList headers = rows[0].split(',');
-     ui->myTable->setHorizontalHeaderLabels(headers);
+    QStringList headers = rows[0].split(',');
+    ui->myTable->setHorizontalHeaderLabels(headers);
     for (int i = 1; i < numRows; ++i) {
         QStringList columns = rows[i].split(',');
         for (int j = 0; j < numColumns; ++j) {
@@ -185,16 +208,33 @@ void MainWindow::on_pushButtonSalvarAnalisar_clicked()
     anDiag->setModal(true);
     anDiag->exec();
     this->GenerateFiles();
-    QString pathToR = QFileDialog::getExistingDirectory(
-                this,
-                tr("Escolha em que diretório está o R para análise"),
-                QDir::currentPath(),
-                QFileDialog::ReadOnly
-                | QFileDialog::ShowDirsOnly
-                );
-    //system("R CMD BATCH analysis.R");
-    string z = "cd " + pathToR.toStdString() + "&& Rscript analysis.R && pause";
-    const char* c = z.c_str();
-    system(c );
+    //    QString pathToR = QFileDialog::getExistingDirectory(
+    //                this,
+    //                tr("Escolha em que diretório está o R para análise"),
+    //                QDir::currentPath(),
+    //                QFileDialog::ReadOnly
+    //                | QFileDialog::ShowDirsOnly
+    //                );
+    //    //system("R CMD BATCH analysis.R");
+    //    string z = "cd " + pathToR.toStdString() + "&& Rscript analysis.R && pause";
+    //    const char* c = z.c_str();
+    //    system("Rbatch.bat");
+    //    QProcess process;
+    //    process.start( "R help" );
+    //    process.waitForFinished();
+    //    QByteArray output = process.readAllStandardOutput();
+    //    QByteArray error = process.readAllStandardError();
+    QProcess p;
+    p.startDetached("cmd.exe", QStringList() << "/c" << "Rbatch.bat");
+    if (p.waitForStarted())
+    {
+        p.waitForFinished();
+        qDebug() << p.readAllStandardOutput();
+    }
+    else
+        qDebug() << "Failed to start";
+
+
+
     //system("Rscript analysis.R");
 }

@@ -35,7 +35,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="nColSpinBox"/>
+         <widget class="QSpinBox" name="nColSpinBox">
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -49,7 +53,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="nRowSpinBox"/>
+         <widget class="QSpinBox" name="nRowSpinBox">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -67,8 +78,6 @@
     </item>
    </layout>
   </widget>
-  <zorder>horizontalLayoutWidget_3</zorder>
-  <zorder>buttonBox</zorder>
  </widget>
  <resources/>
  <connections/>
