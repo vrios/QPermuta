@@ -3,7 +3,7 @@
 #include "getrowcoldialog.h"
 #include <QString>
 #include <QTextStream>
-#include <Qfile>
+#include <QFile>
 #include <QFileDialog>
 #include <QProcess>
 #include <QDebug>
@@ -114,6 +114,8 @@ void MainWindow::GenerateFiles(){
         Rfile.resize(0);
         out2<<"x11();";
         out2<<"plot(1:100);";
+        out2<<"library(devtools)"<<"\n";
+        out2<<"install_github(repo = 'lageIBUSP/Rsampling')"<<"\n";
         out2<<"library (Rsampling);"<<"\n";
         out2<<"read.table(\"data.txt\", header=TRUE, sep=\",\")";
         out2<<"source("<<this->statistics<<")\n";
@@ -121,6 +123,7 @@ void MainWindow::GenerateFiles(){
     }
     Rfile.close();
 
+#ifdef Q_OS_WIN
     //write batch file to run R in windows
     QFile BatchFile("Rbatch.bat");
     BatchFile.open(QFile::WriteOnly | QFile::Text| QFile::Truncate);
@@ -131,11 +134,11 @@ void MainWindow::GenerateFiles(){
         out3<<" echo Rbatch Started."<<"\n";
         out3<<" call Rpathset.bat"<<"\n"; ///https://code.google.com/p/batchfiles/
         out3<<" R CMD BATCH analysis.R"<<"\n";
-
         out3<<" echo Rbatch Ended."<<"\n";
         out3<<"pause";
     }
     BatchFile.close();
+#endif
 
 }
 
@@ -199,7 +202,7 @@ void MainWindow::on_pushButtonSalvarAnalisar_clicked()
     anDiag->setModal(true);
     anDiag->exec();
     this->GenerateFiles();
-
+    #ifdef Q_OS_WIN
     QProcess p;
     p.startDetached("cmd.exe", QStringList() << "/c" << "Rbatch.bat");
     if (p.waitForStarted())
@@ -209,4 +212,17 @@ void MainWindow::on_pushButtonSalvarAnalisar_clicked()
     }
     else
         qDebug() << "Failed to start";
+#endif
+
+#ifdef Q_OS_UNIX
+    QProcess p;
+    p.startDetached("R CMD BATCH analysis.R");
+    if (p.waitForStarted())
+    {
+        p.waitForFinished();
+        qDebug() << p.readAllStandardOutput();
+    }
+    else
+        qDebug() << "Failed to start";
+#endif
 }
