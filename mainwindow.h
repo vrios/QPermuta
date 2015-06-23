@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <QTableWidget>
 #include "getrowcoldialog.h"
-
+#include "getanalysesdialog.h"
+#include <QString>
 namespace Ui {
 class MainWindow;
 }
@@ -13,6 +14,7 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     getrowcoldialog *diag = new getrowcoldialog(this);
+    getAnalysesDialog *anDiag = new getAnalysesDialog(this);
    // QTableWidget *table = new QTableWidget(1,1,this);
 
 public:
@@ -20,18 +22,28 @@ public:
     ~MainWindow();
     int nCols;
     int nRows;
+    QString analysis;
+    QString statistics;
+    int nPerm;
 
 public slots:
     void setCol(int );
     void setRow(int );
+    void setAnalysis(QAbstractButton * );
+    void setNPermutations(int );
+    void setStatistics(int);
 
 private slots:
 
 
-    void on_actionNova_An_lise_triggered();
+    void on_actionNovosDados_triggered();
     void on_actionExit_triggered();
 
-    void on_pushButtonAnalisar_clicked();
+    void on_pushButtonEscolherAnalise_clicked();
+    void on_actionAbrir_Arquivo_triggered();
+    void on_pushButtonSalvarArquivo_clicked();
+
+    void on_pushButtonSalvarAnalisar_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -14,10 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    getrowcoldialog.cpp
+    getrowcoldialog.cpp \
+    getanalysesdialog.cpp
 
 HEADERS  += mainwindow.h \
-    getrowcoldialog.h
+    getrowcoldialog.h \
+    getanalysesdialog.h
 
 FORMS    += mainwindow.ui \
-    getrowcoldialog.ui
+    getrowcoldialog.ui \
+    getanalysesdialog.ui

@@ -24,17 +24,43 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonAnalisar">
+   <widget class="QPushButton" name="pushButtonSalvarArquivo">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>120</x>
       <y>0</y>
-      <width>75</width>
+      <width>91</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Analisar</string>
+     <string>Salvar arquivo</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonEscolherAnalise">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Escolher análise</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonSalvarAnalisar">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>0</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Salvar e Analisar</string>
     </property>
    </widget>
   </widget>
@@ -51,7 +77,8 @@
     <property name="title">
      <string>QPermutar</string>
     </property>
-    <addaction name="actionNova_An_lise"/>
+    <addaction name="actionAbrir_Arquivo"/>
+    <addaction name="actionNovosDados"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
@@ -62,24 +89,20 @@
    <addaction name="menuQPermutar"/>
    <addaction name="menuAbout"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionNova_An_lise"/>
-  </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionNova_An_lise">
+  <action name="actionNovosDados">
    <property name="text">
-    <string>Nova Análise</string>
+    <string>Novos Dados</string>
    </property>
   </action>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbrir_Arquivo">
+   <property name="text">
+    <string>Abrir Arquivo</string>
    </property>
   </action>
  </widget>
