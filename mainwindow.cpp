@@ -139,10 +139,9 @@ void MainWindow::GenerateFiles(){
         out3<<" echo Rbatch Started."<<"\n";
         out3<<" call Rpathset.bat"<<"\n"; ///https://code.google.com/p/batchfiles/
         out3<<" R CMD BATCH analysis.R"<<"\n";
-        //    out3<<" R  plot(c(1:100)"<<"\n";
-        //    out3<<" Rscript plot(c(1:100)";
+
         out3<<" echo Rbatch Ended."<<"\n";
-       // out3<<"pause";
+        out3<<"pause";
     }
     BatchFile.close();
 
@@ -208,22 +207,7 @@ void MainWindow::on_pushButtonSalvarAnalisar_clicked()
     anDiag->setModal(true);
     anDiag->exec();
     this->GenerateFiles();
-    //    QString pathToR = QFileDialog::getExistingDirectory(
-    //                this,
-    //                tr("Escolha em que diretório está o R para análise"),
-    //                QDir::currentPath(),
-    //                QFileDialog::ReadOnly
-    //                | QFileDialog::ShowDirsOnly
-    //                );
-    //    //system("R CMD BATCH analysis.R");
-    //    string z = "cd " + pathToR.toStdString() + "&& Rscript analysis.R && pause";
-    //    const char* c = z.c_str();
-    //    system("Rbatch.bat");
-    //    QProcess process;
-    //    process.start( "R help" );
-    //    process.waitForFinished();
-    //    QByteArray output = process.readAllStandardOutput();
-    //    QByteArray error = process.readAllStandardError();
+
     QProcess p;
     p.startDetached("cmd.exe", QStringList() << "/c" << "Rbatch.bat");
     if (p.waitForStarted())
@@ -233,8 +217,4 @@ void MainWindow::on_pushButtonSalvarAnalisar_clicked()
     }
     else
         qDebug() << "Failed to start";
-
-
-
-    //system("Rscript analysis.R");
 }
