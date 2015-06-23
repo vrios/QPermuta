@@ -38,11 +38,9 @@ private slots:
 
     void on_actionNovosDados_triggered();
     void on_actionExit_triggered();
-
     void on_pushButtonEscolherAnalise_clicked();
     void on_actionAbrir_Arquivo_triggered();
     void on_pushButtonSalvarArquivo_clicked();
-
     void on_pushButtonSalvarAnalisar_clicked();
 
 private:

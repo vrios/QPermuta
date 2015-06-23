@@ -6,8 +6,6 @@ getAnalysesDialog::getAnalysesDialog(QWidget *parent) :
     ui(new Ui::getAnalysesDialog)
 {
     ui->setupUi(this);
-
-     //QButtonGroup *analysis;
 }
 
 getAnalysesDialog::~getAnalysesDialog()

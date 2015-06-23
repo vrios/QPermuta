@@ -2,10 +2,7 @@
 #include "ui_mainwindow.h"
 #include "getrowcoldialog.h"
 #include <QString>
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include<QTextStream>
+#include <QTextStream>
 #include <Qfile>
 #include <QFileDialog>
 #include <QProcess>
@@ -68,13 +65,9 @@ void MainWindow::setTable(){
     ui->myTable->clear();
     ui->myTable->setColumnCount(this->nCols);
     ui->myTable->setRowCount(this->nRows);
-    // ui->myTable->horizontalHeader()->;
-
     QString na="NA";
     for (int i = 0; i < ui->myTable->rowCount(); ++i) {
         for (int j = 0; j < ui->myTable->columnCount(); ++j) {
-            //QTableWidgetItem *cell = ui->myTable->item(i, j);
-            // cell->setText(na);
             QTableWidgetItem* NA = new QTableWidgetItem();
             NA->setText("NA");
             ui->myTable->setItem(i,j,NA);
@@ -96,7 +89,6 @@ void MainWindow::GenerateFiles(){
         datafile.resize(0);
         for(int i = 0; i < ui->myTable->model()->columnCount(); i++)http://stackoverflow.com/questions/22944787/how-to-get-list-of-headers-of-a-qtableview
         {
-            // headers.append(myTableView->model()->headerData(i, Qt::Horizontal).toString();
             out<<ui->myTable->model()->headerData(i, Qt::Horizontal).toString();
             if (i!=ui->myTable->model()->columnCount()-1){out<<",";}
         }

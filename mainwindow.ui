@@ -27,7 +27,7 @@
    <widget class="QPushButton" name="pushButtonSalvarArquivo">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>10</x>
       <y>0</y>
       <width>91</width>
       <height>23</height>
@@ -37,23 +37,10 @@
      <string>Salvar arquivo</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonEscolherAnalise">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>101</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Escolher análise</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButtonSalvarAnalisar">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>110</x>
       <y>0</y>
       <width>101</width>
       <height>23</height>
