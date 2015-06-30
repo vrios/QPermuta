@@ -149,7 +149,7 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -168,6 +168,11 @@
     </item>
     <item>
      <widget class="QComboBox" name="comboBox">
+      <item>
+       <property name="text">
+        <string>Escolha</string>
+       </property>
+      </item>
       <item>
        <property name="text">
         <string>anova</string>
@@ -191,7 +196,14 @@
      </widget>
     </item>
     <item>
-     <widget class="QTextEdit" name="textEdit"/>
+     <widget class="QTextEdit" name="textEdit">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string>Insira sua estatística personalizada aqui. Cuidado com a formatação!</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -227,22 +239,6 @@
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>comboBox</sender>
-   <signal>currentIndexChanged(QString)</signal>
-   <receiver>textEdit</receiver>
-   <slot>insertPlainText(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>266</x>
-     <y>92</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>262</x>
-     <y>123</y>
     </hint>
    </hints>
   </connection>

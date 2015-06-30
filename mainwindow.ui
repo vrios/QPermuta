@@ -24,31 +24,38 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonSalvarArquivo">
+   <widget class="QSplitter" name="splitter">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>91</width>
+      <width>411</width>
       <height>23</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Salvar arquivo</string>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
-   </widget>
-   <widget class="QPushButton" name="pushButtonSalvarAnalisar">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>0</y>
-      <width>101</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Salvar e Analisar</string>
-    </property>
+    <widget class="QPushButton" name="pushButtonInstalar">
+     <property name="text">
+      <string>Instalar RSampling</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonInserirDados">
+     <property name="text">
+      <string>Inserir Dados</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonSalvarArquivo">
+     <property name="text">
+      <string>Salvar arquivo</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonSalvarAnalisar">
+     <property name="text">
+      <string>Salvar e Analisar</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -66,12 +73,14 @@
     </property>
     <addaction name="actionAbrir_Arquivo"/>
     <addaction name="actionNovosDados"/>
+    <addaction name="actionInstalar_RSampling"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
     <property name="title">
-     <string>About</string>
+     <string>Sobre</string>
     </property>
+    <addaction name="actionSobre_o_Qpermuta"/>
    </widget>
    <addaction name="menuQPermutar"/>
    <addaction name="menuAbout"/>
@@ -90,6 +99,16 @@
   <action name="actionAbrir_Arquivo">
    <property name="text">
     <string>Abrir Arquivo</string>
+   </property>
+  </action>
+  <action name="actionInstalar_RSampling">
+   <property name="text">
+    <string>Instalar RSampling</string>
+   </property>
+  </action>
+  <action name="actionSobre_o_Qpermuta">
+   <property name="text">
+    <string>Sobre o Qpermuta</string>
    </property>
   </action>
  </widget>

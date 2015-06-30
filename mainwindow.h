@@ -26,12 +26,13 @@ public:
     QString statistics;
     int nPerm;
 
+
 public slots:
     void setCol(int );
     void setRow(int );
     void setAnalysis(QAbstractButton * );
     void setNPermutations(int );
-    void setStatistics(int);
+    void setStatistics(QString);
 
 private slots:
 
@@ -43,12 +44,21 @@ private slots:
     void on_pushButtonSalvarArquivo_clicked();
     void on_pushButtonSalvarAnalisar_clicked();
 
+    void on_actionInstalar_RSampling_triggered();
+
+    void on_pushButtonInstalar_clicked();
+
+    void on_pushButtonInserirDados_clicked();
+
+    void on_actionSobre_o_Qpermuta_triggered();
+
 private:
     Ui::MainWindow *ui;
-
+    void RunCommand(QString Command);
     void setTable();
     void printTable();
     void GenerateFiles();
+    void Install();
 };
 
 #endif // MAINWINDOW_H

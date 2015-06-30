@@ -21,5 +21,24 @@ void getAnalysesDialog::on_buttonBox_accepted()
 
 void getAnalysesDialog::on_textEdit_textChanged()
 {
-    emit StatisticChosen(ui->comboBox->currentIndex());
+    emit StatisticChosen(ui->textEdit->toPlainText());
+}
+
+void getAnalysesDialog::on_buttonBox_rejected()
+{
+    close();
+}
+
+void getAnalysesDialog::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+    if(arg1!="personalizada")
+    {
+        ui->textEdit->setEnabled(false);
+        ui->textEdit->clear();
+        emit StatisticChosen(arg1);
+    }
+    else{
+        ui->textEdit->setEnabled(true);
+        ui->textEdit->setFocus();
+    }
 }

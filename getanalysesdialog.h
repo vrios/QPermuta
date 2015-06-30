@@ -20,10 +20,14 @@ private slots:
     void on_buttonBox_accepted();
     void on_textEdit_textChanged();
 
+    void on_buttonBox_rejected();
+
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+
 signals:
     void nPermutationsChosen(int);
     void AnalysisChosen(QAbstractButton * );
-    void StatisticChosen(int);
+    void StatisticChosen(QString);
 
 
 private:
