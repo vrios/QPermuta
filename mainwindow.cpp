@@ -354,5 +354,5 @@ void MainWindow::on_actionSobre_o_Qpermuta_triggered()
 {
 
 
-     QMessageBox::about(this,QString::fromLatin1("Sobre o Qpermuta 1.0 beta"),QString::fromUtf8("QPermuta \u00E9 uma interface gr\u00E1fica para o pacote Rsampling, dispon\u00EDvel em https://github.com/lageIBUSP/Rsampling \n\n Q Permuta foi escrito para facilitar a entrada e an\u00E1lise de dados para os que n\u00E3o tem familiaridade com a interface padr\u00E3o do R \n Qpermuta escrito por vitor Rios \n Rsampling escrito por Paulo Prado \n vers\u00E3o mais recente dispon\u00EDvel em https://github.com/vrios/QPermuta/"));
+     QMessageBox::about(this,QString::fromLatin1("Sobre o Qpermuta 1.0 beta"),QString::fromUtf8("QPermuta \u00E9 uma interface gr\u00E1fica para o pacote Rsampling, dispon\u00EDvel em https://github.com/lageIBUSP/Rsampling \n\n Q Permuta foi escrito para facilitar a entrada e an\u00E1lise de dados para os que n\u00E3o tem familiaridade com a interface padr\u00E3o do R \n Qpermuta escrito por Vitor Rios \n Rsampling escrito por Paulo Prado \n vers\u00E3o mais recente dispon\u00EDvel em https://github.com/vrios/QPermuta/"));
 }
